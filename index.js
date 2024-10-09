@@ -2,12 +2,14 @@
 document.querySelectorAll(".drum").forEach((button) => {
   button.addEventListener("click", function () {
     handlePlaySound(this.innerHTML);
+    buttonAnimation(this.innerHTML);
   });
 });
 
 // handle keyboard events for the drum kit
 document.addEventListener("keypress", function (event) {
   handlePlaySound(event.key);
+  buttonAnimation(event.key);
 });
 
 function handlePlaySound(event) {
@@ -43,4 +45,12 @@ function handlePlaySound(event) {
     default:
       break;
   }
+}
+function buttonAnimation(key) {
+  var currentKey = document.querySelector("." + key);
+  if (currentKey === null) return;
+  currentKey.classList.add("pressed");
+  setTimeout(() => {
+    currentKey.classList.remove("pressed");
+  }, 100);
 }
